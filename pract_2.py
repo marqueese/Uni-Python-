@@ -3,7 +3,6 @@ import math
 from _ast import While
 from math import pi
 
-
 def speed_calculator():
     distance = float(input("how far did you travel in kilometers: "))
     duration = float(input("how long did you travel for in hours: "))
@@ -13,7 +12,6 @@ def speed_calculator():
     speed = round(speed, 2)
     print("your average speed was ", speed, "kmph")
 
-
 def circumference_of_circle():
     radius = float(input("what is the radius of your circle: "))
 
@@ -21,13 +19,11 @@ def circumference_of_circle():
 
     print("the circumference of the circle is: ", circumference)
 
-
 def area_of_circle():
     radius = float(input("what is the radius of your circle: "))
     area = pi * radius ** 2
 
     print("the area of your circle is: ", area)
-
 
 def cost_of_pizza():
     diameter = float(input("what is the diameter of your pizza in cm: "))
@@ -39,7 +35,6 @@ def cost_of_pizza():
     total = round(total, 2)
     print("your pizza will cost £", total)
 
-
 def slope_of_line():
     x1 = float(input("what is your first point on the x-axis: "))
     y1 = float(input("what is your first point on the y-axis: "))
@@ -49,7 +44,6 @@ def slope_of_line():
     slope = (y2 / y1) / (x2 - x1)
 
     print("the slope of the line that connects them is")
-
 
 def distance_between_points():
     x1 = float(input("what is your first point on the x-axis: "))
@@ -103,7 +97,6 @@ def fibonacci():
         current_number = next_number
         print(current_number)
 
-
 def counting_coins():
     ammount = int(input("How much money do you have (in pence): "))
 
@@ -123,9 +116,6 @@ def counting_coins():
         ammount &= coin_value # add the remainder to it
         print(f"{coin_ammount} * {coin}")
 
-counting_coins()
-
-
 while True:
     print("\nwhat function is being run")
     print("1: Speed calculator")
@@ -138,6 +128,7 @@ while True:
     print("8: sum of squares")
     print("9: average of numbers")
     print("10: fibonacci")
+    print("11: counting coins")
     choice = int(input("Choose a function number: "))
 
     if choice == 1:
@@ -170,4 +161,5 @@ while True:
     if choice == 10:
         fibonacci()
 
-   
+    if choice == 11:
+        counting_coins()

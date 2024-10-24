@@ -10,8 +10,7 @@ def biscuit_cutting():
     #get radius to work out area of each biscut
     radius = diameter / 2
     area = pi * (radius ** 2)
-    
-   
+
     #area of the mixture
     mixture_length = length * diameter
     mixture_width = diameter * width

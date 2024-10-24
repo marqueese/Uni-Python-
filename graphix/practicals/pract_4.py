@@ -1,4 +1,9 @@
 from graphix import *
+import os
+os.chdir("Text_Files")
+os.getcwd()
+os.listdir()
+
 
 def personal_greeting():
         name = input("What is your name: ")
@@ -63,8 +68,53 @@ def sing_a_song():
                 print(f"{word * wps}")
 
 def conversion_table():
-        gbp = 1
-        euro = 1.17
+    exchange_rate = 1.17
+
+    print(f"{'Euros':>10} {'Pounds':>10}")
+    print("-" * 22)
+
+    for euros in range(21):
+        pounds = euros / exchange_rate
+        print(f"{euros:>10} {pounds:>10.2f}")
+
+def make_initialism():
+    phrase = input("enter your stuff: ")
+
+    words = phrase.split()
+
+    initialism = "".join(word[0].upper() for word in words)
+
+    print(initialism)
+
+def file_in_caps():
+    input_file = open("Quotations.txt", "r")
+
+    contents = input_file.read()
+    print(contents.upper())
+    input_file.close()
+
+def total_spending():
+    value = 0
+
+    with open("Spending.txt", "r") as input_file:
+        for line in input_file:
+            value += float(line)
+    print(f"Total spending: {value}")
+
+def name_to_number():
+    name = input("Enter your name: ").lower()
+
+    total_value = 0
+
+    for char in name:
+        if char.isalpha():
+            letter_value = ord(char) - ord('a') + 1
+            total_value += letter_value
+
+    print(f"The numerical value of your name is: {total_value}")
+
+
+
 
 def menu():
     while True:
@@ -76,8 +126,12 @@ def menu():
         print("5. Grade test")
         print("6. Letter thingy")
         print("7. Sing a song ")
-        print("7. Conversion Table ")
-        print("9. Exit")
+        print("8. Conversion Table ")
+        print("9: Make Initialism")
+        print("10: File in Caps")
+        print("11: Total Spending")
+        print("12: Name to number")
+        print("0. Exit")
 
         choice = input("\nEnter the number of your choice: ")
 
@@ -95,7 +149,19 @@ def menu():
                 graphic_letters()
         elif choice == "7":
                 sing_a_song()
-        elif choice == '9':
+        elif choice == "8":
+                conversion_table()
+        elif choice == "9":
+                make_initialism()
+        elif choice == "10":
+                file_in_caps()
+        elif choice == "11":
+            total_spending()
+        elif choice == "12":
+            name_to_number()
+        elif choice == "13":
+            name_to_number()
+        elif choice == '0':
             print("Exiting the program.")
             break
         else:

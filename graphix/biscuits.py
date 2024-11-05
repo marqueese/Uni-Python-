@@ -38,21 +38,26 @@ def biscuit_cutting():
     else:
         print("there isn't not enough mixture for any more biscuts")
 
-from graphix import * 
+from graphix import *
 
 def clicking():
     window = Window("Graph", 500, 500)
     
+    click = window.get_mouse()  # Get the initial click location to set message position
     i = 1
     
-    for i in range (1,10):
-        click = window.get_mouse()
+    # Create the Text object at the clicked position with the initial message
+    message = "H" + "i" * i
+    text = Text(click, message)
+    text.draw(window)
+    
+    # Update the text message in place on each iteration
+    for i in range(2, 10):
         message = "H" + "i" * i
+        text.set_message(message)  # Update the text content
+        window.get_mouse()  # Wait for another click to update
 
-        text = Text(click, message)
-        text.draw(window)
-
-    window.get_mouse()
+    window.get_mouse()  # Wait for a final click to close
     window.close()
 
 clicking()

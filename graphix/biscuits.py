@@ -37,3 +37,22 @@ def biscuit_cutting():
         print("with the remaining mixture you can make",extra_biscuts,"more biscuits")
     else:
         print("there isn't not enough mixture for any more biscuts")
+
+from graphix import * 
+
+def clicking():
+    window = Window("Graph", 500, 500)
+    
+    i = 1
+    
+    for i in range (1,10):
+        click = window.get_mouse()
+        message = "H" + "i" * i
+
+        text = Text(click, message)
+        text.draw(window)
+
+    window.get_mouse()
+    window.close()
+
+clicking()

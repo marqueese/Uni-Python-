@@ -1,5 +1,4 @@
 import math
-
 from graphix import *
 from math import *
 
@@ -16,89 +15,39 @@ def main_circles():
     circ = circ_area(radius)
     print(f"The area is {area} and the circumference is {circ} ")
 
-
 #drawing stuff
-def draw():
-    circle_1 = Circle(Point(150, 150), 120)
-    circle_1.fill_colour="white"
-
-    circle_2 = Circle(Point(150, 150), 60)
-    circle_2.fill_colour ="brown"
-
-    circle_3 = Circle(Point(150, 150), 30)
-    circle_3.fill_colour = "black"
-
-    return circle_1, circle_2, circle_3
-
-def draw_second_eye():
-    circle_4 = Circle(Point(390, 150), 120)
-    circle_4.fill_colour="white"
-
-    circle_5 = Circle(Point(390, 150), 60)
-    circle_5.fill_colour ="brown"
-
-    circle_6 = Circle(Point(390, 150), 30)
-    circle_6.fill_colour = "black"
-
-    return circle_4, circle_5, circle_6
-
-def drawing():
-    window = Window("circle" , 500, 500)
-
-    circle_1, circle_2 , circle_3 = draw()
-
-    circle_1.draw(window)
-    circle_2.draw(window)
-    circle_3.draw(window)
+def draw_circle(x, y, radius, color, window):
+    circle = Circle(Point(x, y), radius)
+    circle.fill_colour = color
+    circle.draw(window)
+    
+    
+def draw_brown_eye(x, y, window):
+    draw_circle(150, 150, 120, "white", window)
+    draw_circle(150, 150, 60, "brown", window)
+    draw_circle(150, 150, 30, "black", window)
 
     window.get_mouse()
     window.close()
+    
+def draw_pair_of_eyes():
+    window = Window("eyes again" , 500, 500)
+    draw_brown_eye(40, 40, window)
+    draw_brown_eye(150, 150, window)
 
-def draw_block_of_stars():
-    wps = int(input("how many times a line: "))
-    rows = int(input("how many rows of this: "))
 
-    return wps, rows
-
-def main_star_block():
+def draw_block_of_stars(width, height):
     char = "*"
-    rows , wps = draw_block_of_stars()
-
-    for words in range(rows):
-        print(f"{char * wps}")
+    for words in range(width):
+        print(f"{char * height}")
 
 
 def draw_an_e():
-    char = "*"
-    wps, rows = draw_block_of_stars()
-
-    print(char * wps)
-
-    for i in range(rows - 2):
-        print(char)
-
-    print(char * (wps // 2))
-
-    for i in range(rows - 2):
-        print(char)
-
-    print(char * wps)
-
-def draw_a_pair_of_eyes():
-    window = Window("circle" , 550, 500)
-
-    circle_1, circle_2, circle_3 = draw()
-    circle_4, circle_5, circle_6 = draw_second_eye()
-
-    circle_1.draw(window)
-    circle_2.draw(window)
-    circle_3.draw(window)
-    circle_4.draw(window)
-    circle_5.draw(window)
-    circle_6.draw(window)
-
-    window.get_mouse()
-    window.close()
+    draw_block_of_stars(2, 8)
+    draw_block_of_stars(2, 2)
+    draw_block_of_stars(2, 8)
+    draw_block_of_stars(2, 2)
+    draw_block_of_stars(2, 8)
 
 def distance_between_points(p1, p2):
     return math.sqrt((p2.x - p1.x)**2 + (p2.y - p1.y)**2)
@@ -129,7 +78,7 @@ def display_distance_between_points():
     window.get_mouse()
     window.close()
 
-def draw_blocks(width1, width2, width3, width4, height):
+def draw_blocks(width1, width2, width3, width4, height):#spacing from column, number per line, spacing, spacing size, number of lines
     for _ in range(height):
         line = " " * width1 + "*" * width2 + " " * width3 + "*" * width4
         print(line)
@@ -140,4 +89,3 @@ def draw_letter_a():
     draw_blocks(1, 8, 0, 0, 2)
     draw_blocks(1, 2, 4, 2, 3)
 
-draw_a_pair_of_eyes()

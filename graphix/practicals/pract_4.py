@@ -1,4 +1,5 @@
 from graphix import *
+from math import *
 import os
 os.chdir("Text_Files")
 os.getcwd()
@@ -158,55 +159,13 @@ def rainfall_graphics():
             location_text.draw(window)
 
             # Draw the rainfall as asterisks just below the location text
-            rainfall_text_point = Point(click_point.get_x(), click_point.get_y() + 20)
+            rainfall_text_point = Point(click_point.x, click_point.y + 20)
             rainfall_message = "*" * rainfall
             rain = Text(rainfall_text_point, rainfall_message)
             rain.draw(window)
 
     # Wait for final click to close the window
     window.get_mouse()
-    window.close()
-
-
-def five_click_stick_figure():
-    window = Window("Stick Figure", 400, 400)
-
-    # Click 1: Top center of the head
-    p1 = window.get_mouse()
-
-    # Click 2: Radius of the head
-    p2 = window.get_mouse()
-    radius = ((p2.get_x() - p1.get_x()) ** 2 + (p2.get_y() - p1.get_y()) ** 2) ** 0.5
-    head = Circle(p1, radius)
-    head.draw(window)
-
-    # Click 3: Body start (only y-coordinate changes)
-    p3 = window.get_mouse()
-    body_start = Point(p1.get_x(), p3.get_y())
-    body = Line(p1, body_start)
-    body.draw(window)
-
-    # Click 4: Left foot position
-    left_foot = window.get_mouse()
-    left_leg = Line(body_start, left_foot)
-    left_leg.draw(window)
-
-    # Click 5: Right foot position
-    right_foot = window.get_mouse()
-    right_leg = Line(body_start, right_foot)
-    right_leg.draw(window)
-
-    # Draw the arms at a midpoint between head and body start
-    arm_y = (p1.get_y() + p3.get_y()) / 2
-    left_hand = Point(p1.get_x() - radius, arm_y)
-    right_hand = Point(p1.get_x() + radius, arm_y)
-    left_arm = Line(left_hand, Point(p1.get_x(), arm_y))
-    right_arm = Line(right_hand, Point(p1.get_x(), arm_y))
-    left_arm.draw(window)
-    right_arm.draw(window)
-
-    # To use five_click_stick_figure
-    window.get_mouse()  # Keep the window open
     window.close()
 
 
@@ -260,8 +219,6 @@ def menu():
             rainfall_chart()
         elif choice == "14":
             rainfall_graphics()
-        elif choice == "15":
-            five_click_stick_figure()
         elif choice == '0':
             print("Exiting the program.")
             break

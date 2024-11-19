@@ -108,3 +108,34 @@ def eye_picker():
 
     window.get_mouse()
     window.close()
+
+
+def display():
+    window = Window("Shapes", 500, 500)
+
+    for i in range(0, 500, 100):
+        line1 = Line(Point(0, i), Point(i, 0))
+        line1.draw(window)
+        line1.fill_colour = "blue"
+
+        line2 = Line(Point(i, 500), Point(500, i))
+        line2.draw(window)
+        line2.fill_colour = "red"
+
+
+    for i in range(0, 500, 100):
+        line3 = Line(Point(0, 500 - i), Point(i, 500))
+        line3.draw(window)
+        line3.fill_colour = "blue"
+
+        line4 = Line(Point(i, 0), Point(500, 500 - i))
+        line4.draw(window)
+        line4.fill_colour = "red"
+
+
+    window.get_mouse()
+    window.close()
+
+
+display()
+

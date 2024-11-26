@@ -1,4 +1,7 @@
-from graphix import *
+from graphix import Window, Point, Circle, Line, Text
+import time
+
+
 
 def get_name():
     while True:
@@ -207,4 +210,68 @@ def table_tennis_scorer():
     window.get_mouse()
     window.close()
 
-table_tennis_scorer()
+
+def guess_number():
+    import random
+
+    random_number = random.randint(1, 101)
+
+    while True:
+        guess = int(input("What is your guess: "))
+
+        if guess == random_number:
+            print("Congratulations you win")
+            break
+        else:
+            print(f"Ha BOZO you suck the number was {random_number} try again")
+
+
+def draw_eye (x, y):
+    window = Window("Eyes", 500, 500)
+
+    draw_circle(x, y, 120, "white", window)
+    draw_circle(x, y, 60, "light blue", window)
+    draw_circle(x, y, 30, "black", window)
+    
+    window.get_mouse()
+
+
+def clickable_box_of_eyes(x, y):
+    draw_eye(120, 120)
+    
+
+
+
+
+clickable_box_of_eyes(100, 100)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

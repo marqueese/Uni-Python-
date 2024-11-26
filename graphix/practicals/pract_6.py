@@ -1,5 +1,61 @@
 from graphix import *
 
+from graphix import *
+
+
+def main_menu():
+    while True:
+        print("\nMain Menu")
+        print("1. Fast Food Order Price")
+        print("2. What to Do Today")
+        print("3. Display Square Roots")
+        print("4. Calculate Grade")
+        print("5. Peas in a Pod")
+        print("6. Ticket Price")
+        print("7. Numbered Square")
+        print("8. Eye Picker")
+        print("9. Display Shapes")
+        print("0. Exit")
+
+        try:
+            choice = int(input("Enter your choice (0-9): "))
+            if choice == 0:
+                print("Exiting the program. Goodbye!")
+                break
+            elif choice == 1:
+                fast_food_order_price()
+            elif choice == 2:
+                what_to_do_today()
+            elif choice == 3:
+                start = int(input("Enter the start number: "))
+                end = int(input("Enter the end number: "))
+                display_square_routes(start, end)
+            elif choice == 4:
+                mark = int(input("Enter the mark (0-20): "))
+                calculate_grade(mark)
+            elif choice == 5:
+                peas_in_a_pod()
+            elif choice == 6:
+                distance = float(input("Enter the distance (km): "))
+                age = int(input("Enter the age: "))
+                ticket_price(distance, age)
+            elif choice == 7:
+                n = int(input("Enter the size of the square: "))
+                numbered_square(n)
+            elif choice == 8:
+                eye_picker()
+            elif choice == 9:
+                display()
+            else:
+                print("Invalid choice. Please select a number between 0 and 9.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+
+# Call the menu to start the program
+main_menu()
+
+
 def fast_food_order_price():
     price = float(input("How much is the order: :"))
     delivery = 0

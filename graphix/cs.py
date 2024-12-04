@@ -9,14 +9,13 @@ def size():
         screen_size = int(input("What size will the screen be: "))
 
         if screen_size == 1:
-            return 500
+            return 500, 5
         elif screen_size == 2:
-            return 700
+            return 700, 7
         elif screen_size == 3:
-            return  900
+            return  900, 9
         else:
             print("What you have entered is not an option retry")
-
 
 def colors():
     print("1: red")
@@ -39,19 +38,12 @@ def colors():
             print("Enter a number from the list provided")
             continue
 
-        color_name = None #default value or stuff breaks
-        if color_choice == '1':
-            color_name = "red"
-        elif color_choice == '2':
-            color_name = "green"
-        elif color_choice == '3':
-            color_name = "blue"
-        elif color_choice == '4':
-            color_name = "orange"
-        elif color_choice == '5':
-            color_name = "magenta"
-        elif color_choice == '6':
-            color_name = "purple"
+        color_list = {
+            '1':'red', '2': 'green', '3': 'blue' ,
+            '4': 'orange', '5': 'purple', '6': 'magenta'
+        }
+
+        color_name = color_list[color_choice]
 
         if color_name in chosen_color:
             print("You have already chosen this color")
@@ -60,10 +52,35 @@ def colors():
 
     return chosen_color #colors should be stored in this
 
+def create_grid(colors, grid_size):
+    color_grid = []
+    arrangement = []
 
-def draw(window, grid, square_width, screen_size): # call this one to make stuff
+    for rows in range (grid_size):
+        color_row = []
+        arrangement_rows = []
+        for column in range (grid_size): # read these comments beofre you try to change things
+            if rows == column or rows + column == grid_size -1: # eg 1 == 2 or 1 + 2 == 5-1 diagonal and reversed diagonal
+                color_row.append(colors[0])
+                #arrangement_rows.append('i')
+            elif rows < column and rows + column < grid_size -1: # eg 3 < 4 and 1 + 2 < 5 -1 top section
+                color_row.append(colors[1])
+                #arrangement_rows.append('f')
+            elif rows > column and rows + column > grid_size -1: # bottom section cant be bothered to use example
+                color_row.append(colors[1])
+                #arrangement_rows.append('f') # sort this out when i can be bothered
+            else:
+                color_row.append(colors[2])
+                arrangement_rows.append('p')
+        color_grid.append(color_row)
+        arrangement.append(arrangement_rows)
 
-    rows, columns = screen_size, screen_size # specify this when making the graph thingy
+
+    return color_grid, arrangement
+
+def draw(window, grid, square_width): # call this one to make stuff
+
+    rows, columns = len(grid), len(grid[0])# specify this when making the graph thingy
 
     for row in range(rows):
         for column in range (columns):
@@ -78,69 +95,14 @@ def draw(window, grid, square_width, screen_size): # call this one to make stuff
             rectangle.fill_colour = cell_color
             rectangle.draw(window)
 
-
-def list_1():
-    chosen_colors = colors()
-
-    color_grid = [# where colors are
-        [chosen_colors[0], chosen_colors[1], chosen_colors[1], chosen_colors[1], chosen_colors[0]],
-        [chosen_colors[2], chosen_colors[0], chosen_colors[1], chosen_colors[0], chosen_colors[2]],
-        [chosen_colors[2], chosen_colors[2], chosen_colors[0], chosen_colors[2], chosen_colors[2]],
-        [chosen_colors[2], chosen_colors[0], chosen_colors[1], chosen_colors[0], chosen_colors[2]],
-        [chosen_colors[0], chosen_colors[1], chosen_colors[1], chosen_colors[1], chosen_colors[0]]]
-
-    arrangement = [ # determine where items go
-        ["i", "i", "i", "i", "i"],
-        ["i", "f", "p", "f", "i"],
-        ["i", "p", "f", "p", "i"],
-        ["i", "f", "p", "f", "i"],
-        ["i", "i", "i", "i", "i"]]
-
-    window = Window("small grid",relative_size, relative_size)
-
-    draw(window, color_grid, 100, 5)
-    #patches(window, arrangement, 100)
-    window.get_mouse()
-    window.close()
-
-def list_2():
-    chosen_colors = colors()
-
-    color_grid = [# where colors are
-        [chosen_colors[0], chosen_colors[1], chosen_colors[1], chosen_colors[1], chosen_colors[1], chosen_colors[1], chosen_colors[0]],
-        [chosen_colors[2], chosen_colors[0], chosen_colors[1], chosen_colors[1], chosen_colors[1], chosen_colors[0], chosen_colors[2]],
-        [chosen_colors[2], chosen_colors[2], chosen_colors[0], chosen_colors[1], chosen_colors[0], chosen_colors[2], chosen_colors[2]],
-        [chosen_colors[2], chosen_colors[2], chosen_colors[2], chosen_colors[0], chosen_colors[2], chosen_colors[2], chosen_colors[2]],
-        [chosen_colors[2], chosen_colors[2], chosen_colors[0], chosen_colors[1], chosen_colors[0], chosen_colors[2], chosen_colors[2]],
-        [chosen_colors[2], chosen_colors[0], chosen_colors[1], chosen_colors[1], chosen_colors[1], chosen_colors[0], chosen_colors[2]],
-        [chosen_colors[0], chosen_colors[1], chosen_colors[1], chosen_colors[1], chosen_colors[1], chosen_colors[1], chosen_colors[0]]
-        ]
-
-    arrangement = [ # determine where items go
-        ["i", "i", "i", "i", "i", "i", "i"],
-        ["i", "f", "p", "p", "p", "f", "i"],
-        ["i", "p", "f", "p", "f", "p", "i"],
-        ["i", "p", "p", "f", "p", "p", "i"],
-        ["i", "p", "f", "p", "f", "p", "i"],
-        ["i", "f", "p", "p", "p", "f", "i"],
-        ["i", "i", "i", "i", "i", "i", "i"],
-    ]
-
-    window = Window("small grid",relative_size, relative_size)
-
-    draw(window, color_grid, 100, 7)
-    #patches(window, arrangement, 100)
-    window.get_mouse()
-    window.close()
-
 if __name__ == "__main__":
-    relative_size = size()
+    relative_size, grid_size = size()
+    chosen_colors = colors()
 
-    while True:
-        if relative_size == 500:
-            list_1()
-        if relative_size == 700:
-            list_2()
-        else:
-            print("i havent made the rest yet")
+    colors, arranged = create_grid(chosen_colors, grid_size)
 
+    window = Window("Grid thingy", relative_size, relative_size)
+    draw(window, colors, relative_size // grid_size)
+
+    window.get_mouse()
+    window.close()

@@ -1,5 +1,6 @@
 from graphix import *
 
+
 def size():
     print("1: 5 x 5")
     print("2: 7 x 7")
@@ -17,14 +18,9 @@ def size():
         else:
             print("What you have entered is not an option retry")
 
-def colors():
-    print("1: red")
-    print("2: green")
-    print("3: blue")
-    print("4: orange")
-    print("5: magenta")
-    print("6: purple")
 
+def colors():
+    print("1: red\n2: green\n3: blue\n4: orange\n5: magenta\n6: purple")
     chosen_color = [] #store colors in this list and use them later
 
     while len(chosen_color) < 3: # runs until 3 colors are chosen
@@ -52,34 +48,94 @@ def colors():
 
     return chosen_color #colors should be stored in this
 
+
+def patch_1(length, x, y, window, color):
+    for i in range(0, length, 20):
+        line1 = Line(Point(x , y + i), Point(i + x, y))
+        line1.draw(window)
+        line1.fill_colour = color
+
+        line2 = Line(Point(x+ i, y + length), Point(x + length, y+ i))
+        line2.draw(window)
+        line2.fill_colour = color
+
+    for i in range(0, length, 20):
+        line3 = Line(Point(x,y + length - i), Point(x+ i, y+ length))
+        line3.draw(window)
+        line3.fill_colour = color
+
+        line4 = Line(Point(x+ i, y), Point(x+ length, y+ length - i))
+        line4.draw(window)
+        line4.fill_colour = color
+
+
+def patch_2(base, height, rows , cols, window, x ,y, color):
+# fix the shapes eventually
+    start_x1 , start_y1 = x + 10, y
+    start_x2 , start_y2 = x + base + 10, y
+    start_x3 , start_y3 = 10 + x + base // 2, y + height
+
+    for row in range(rows):
+        offset = -(base // 2) if row % 2 != 0 else 0 # if the row number has no remainders shift it by the base
+
+        x1_1, x2_1, x3_1 = start_x1 + offset, start_x2 + offset, start_x3 + offset
+
+        for column in range(cols):
+
+            x1 = Point(x1_1, start_y1)
+            x2 = Point(x2_1, start_y2)
+            x3 = Point(x3_1, start_y3)
+
+            triangle = Polygon([x1, x2, x3])
+            triangle.draw(window)
+            triangle.fill_colour = color
+
+            x1_1 += base
+            x2_1 += base
+            x3_1 += base
+
+        start_y1 += height
+        start_y2 += height
+        start_y3 += height
+
+
 def create_grid(colors, grid_size):
     color_grid = []
-    arrangement = []
 
     for rows in range (grid_size):
         color_row = []
-        arrangement_rows = []
         for column in range (grid_size): # read these comments beofre you try to change things
             if rows == column or rows + column == grid_size -1: # eg 1 == 2 or 1 + 2 == 5-1 diagonal and reversed diagonal
                 color_row.append(colors[0])
-                #arrangement_rows.append('i')
             elif rows < column and rows + column < grid_size -1: # eg 3 < 4 and 1 + 2 < 5 -1 top section
                 color_row.append(colors[1])
-                #arrangement_rows.append('f')
             elif rows > column and rows + column > grid_size -1: # bottom section cant be bothered to use example
                 color_row.append(colors[1])
-                #arrangement_rows.append('f') # sort this out when i can be bothered
             else:
                 color_row.append(colors[2])
-                arrangement_rows.append('p')
         color_grid.append(color_row)
-        arrangement.append(arrangement_rows)
+
+    return color_grid
 
 
-    return color_grid, arrangement
+def patch_grid(grid_size):
+    arrangement = []
 
-def draw(window, grid, square_width): # call this one to make stuff
+    for row in range(grid_size):
+        arrangement_row = []
+        for column in range(grid_size):
+            if row == 0 or row == grid_size - 1 or column == 0 or column == grid_size - 1:
+                arrangement_row.append('o')
+            elif row == column or row + column == grid_size - 1:
+                arrangement_row.append('p')
+            else:
+                arrangement_row.append('f')
+        arrangement.append(arrangement_row)
 
+    return arrangement
+
+
+def draw(window, grid, square_width, arrangement): # call this one to make stuff
     rows, columns = len(grid), len(grid[0])# specify this when making the graph thingy
 
     for row in range(rows):
@@ -90,19 +146,28 @@ def draw(window, grid, square_width): # call this one to make stuff
             y2 = y1 + square_width
 
             cell_color = grid[row][column]
+            cell_type = arrangement[row][column]
 
-            rectangle = Rectangle(Point(x1, y1), Point(x2, y2))
-            rectangle.fill_colour = cell_color
-            rectangle.draw(window)
+            if cell_type == 'p':
+                patch_1(100, x1, y1, window, cell_color)
+            elif cell_type == 'f':
+                patch_2(22, 20, 5, 4, window, x1, y1, cell_color)# fuck YOU STUPID BITCH COORDINATES
+            else:
+                rectangle = Rectangle(Point(x1, y1), Point(x2, y2))
+                rectangle.fill_colour = cell_color
+                rectangle.draw(window)
+
 
 if __name__ == "__main__":
+    #import the stuff
     relative_size, grid_size = size()
     chosen_colors = colors()
+    arrangement_grid = patch_grid(grid_size)
+    colors = create_grid(chosen_colors, grid_size)
 
-    colors, arranged = create_grid(chosen_colors, grid_size)
-
+    #draw the stuff
     window = Window("Grid thingy", relative_size, relative_size)
-    draw(window, colors, relative_size // grid_size)
+    draw(window, colors, relative_size // grid_size,arrangement_grid)
 
     window.get_mouse()
     window.close()

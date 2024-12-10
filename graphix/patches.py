@@ -1,19 +1,20 @@
 from graphix import *
 
-def patch_2(base, height, rows , cols):
-    window = Window("small grid", 500, 500)
+window = Window("Grid thingy", 500, 500)
 
-    start_x1 , start_y1 = 0, 0
-    start_x2 , start_y2 = base, 0
-    start_x3 , start_y3 = base // 2, height
+
+def patch_2(base, height, rows, cols, start_x=0, start_y=0):#
+    start_x1, start_y1 = start_x, start_y
+    start_x2, start_y2 = start_x + base, start_y
+    start_x3, start_y3 = start_x + base // 2, start_y + height
 
     for row in range(rows):
-        offset = -(base // 2) if row % 2 != 0 else 0 # if the row number has no remainders shift it by the base
+        offset = -(base // 2) if row % 2 != 0 else 0  # Offset for alternate rows
 
         x1_1, x2_1, x3_1 = start_x1 + offset, start_x2 + offset, start_x3 + offset
 
         for column in range(cols):
-
+            # Draw the full triangle
             x1 = Point(x1_1, start_y1)
             x2 = Point(x2_1, start_y2)
             x3 = Point(x3_1, start_y3)
@@ -22,10 +23,26 @@ def patch_2(base, height, rows , cols):
             triangle.draw(window)
             triangle.fill_colour = "red"
 
+            # Move to the next column
             x1_1 += base
             x2_1 += base
             x3_1 += base
 
+        # Handle the half-triangles at the ends of rows
+        if row % 2 != 0:  # Rows with offset need left and right half-triangles
+            left_half = Polygon([Point(start_x1, start_y1),
+                                 Point(start_x1 + base // 2, start_y1 + height),
+                                 Point(start_x1 + base // 2, start_y1)])
+            left_half.draw(window)
+            left_half.fill_colour = "red"
+
+            right_half = Polygon([Point(x1_1 - base // 2, start_y1),
+                                  Point(x1_1, start_y1),
+                                  Point(x1_1 - base // 2, start_y1 + height)])
+            right_half.draw(window)
+            right_half.fill_colour = "red"
+
+        # Move to the next row
         start_y1 += height
         start_y2 += height
         start_y3 += height
@@ -33,32 +50,34 @@ def patch_2(base, height, rows , cols):
     window.get_mouse()
     window.close()
 
-patch_2(25, 30, 15, 16)
+
+patch_2(50, 50, 5, 5, start_x=100, start_y=100)
 
 
-def patch_1(length):
+def patch_1(length, x, y ):
 
     window = Window("small grid", 500, 500)
 
     for i in range(0, length, 20):
-        line1 = Line(Point(0, i), Point(i, 0))
+        line1 = Line(Point(x,y + i), Point(i + x, y))
         line1.draw(window)
         line1.fill_colour = "blue"
 
-        line2 = Line(Point(i, 100), Point(100, i))
+        line2 = Line(Point(x+ i, y + 100), Point(x + 100, y+ i))
         line2.draw(window)
         line2.fill_colour = "red"
 
     for i in range(0, length, 20):
-        line3 = Line(Point(0, 100 - i), Point(i, 100))
+        line3 = Line(Point(x,y + 100 - i), Point(x+ i, y+ 100))
         line3.draw(window)
         line3.fill_colour = "blue"
 
-        line4 = Line(Point(i, 0), Point(100, 100 - i))
+        line4 = Line(Point(x+ i, y), Point(x+ 100, y+ 100 - i))
         line4.draw(window)
         line4.fill_colour = "red"
 
     window.get_mouse()
     window.close()
 
-#patch_1(100)
+#patch_1(100, 50, 50)
+

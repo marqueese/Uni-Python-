@@ -89,19 +89,67 @@ class GradeBook:
         return "\n".join(f"{module}: {grade}" for module, grade in self.grades.items())
 
 
+class SmartPhone:
+    def __init__(self):
+        self.apps_installed = ["Messages", "Contacts", "Angry Birds"]
+        self.app_store =["Spotify", "Youtube", "Instagram"]
+
+
+    def select_option(self, user_choice):
+        if user_choice == "1":
+            chosen_app = input("What app is being installed: ")
+            SmartPhone.install(self, chosen_app)
+        elif user_choice == "2":
+            chosen_app = input("What app is being deleted: ")
+            SmartPhone.delete(self, chosen_app)
+        #elif user_choice == 3: 
+            #SmartPhone.change()
+
+
+    def install(self, chosen_app):
+        if chosen_app in self.apps_installed:
+            return f"The app {chosen_app} is already installed"
+        elif chosen_app in self.app_store:
+            self.app_store.remove(chosen_app)
+            self.apps_installed.append(chosen_app)
+            return f"The app {chosen_app} has been installed"
+        elif chosen_app == "Exit":
+            SmartPhone.select_option()
+        else:
+            return "App chosen does not exist"
+    
+
+    def delete(self, chosen_app):
+        if chosen_app in self.apps_installed:
+            self.app_store.append(chosen_app)
+            self.apps_installed.remove(chosen_app)
+            return f"The app {chosen_app} has been deleted"
+        elif chosen_app in self.app_store:
+            return f"The app {chosen_app} is not currently installed"
+        elif chosen_app == "Exit":
+            SmartPhone.select_option()
+        else:
+            return "App chosen does not exist"
+    
+    
+    def change_app(self, chosen_app):
+        if chosen_app in self.apps_installed
+
+
+    def __str__(self):
+        if not self.app_store:
+            return "All apps have been installed"
+          
+
 def test_square():
     square = Square(5, 0)
-
     print(f"Default outline is {square.outline_color} and fill color is {square.fill_color}")
 
     square.outline_color = "red"
     square.fill_color = "orange"
 
     print(f"Changing square outline to {square.outline_color} and the fill color to {square.fill_color}")
-
     print(square)
-
-
 # test_square()
 
 
@@ -111,25 +159,18 @@ def test_square_2():
     print(f"length of a side is {square.length}")
     print(f"area is {square.area()}")
     print(f"perimeter is {square.perimeter()}")
-
-
 # test_square_2()
 
 
 def test_square_3():
     square = Square(10, 7)
     print(f"{square.get_center()}")
-
-
 # test_square_3()
 
 
 def test_circle_1():
     circle = MyCircle(1, 5, "Green", "Blue", 6)
-
     print(circle)
-
-
 # test_circle_1()
 
 
@@ -155,6 +196,7 @@ def bank_account_1():
     print(account)
 #bank_account_1()
 
+
 def hotel_room_1():
     hotel = HotelRoom()
 
@@ -163,6 +205,7 @@ def hotel_room_1():
 
     print(hotel.is_occupied())
 #hotel_room_1()
+
 
 def gradebook_1():
     gradebook = GradeBook()
@@ -173,6 +216,61 @@ def gradebook_1():
 
     print(gradebook)
     print("The average grade is: ", gradebook.average_grades())
-gradebook_1()
+#gradebook_1()
 
 
+def smartphone_1():
+    phone = SmartPhone()
+
+    while True:
+        print("Currently installed: ", phone.apps_installed)
+        print("Available in store:", phone.app_store)
+
+        print("What option will you be selecting")
+        user_choice = input("1:Install App\n2:Delete App\n3:Change current App\n4:Exit\n")   
+
+        if user_choice == "4":
+            print("Shutting down phone")
+            break
+        elif "1">= user_choice <= "3":
+            phone.select_option(user_choice)
+        else:
+            print("Selection is incorrect")
+
+def menu():
+    print("\nPlease select an option:")
+    print("1. Test Square 1 ")
+    print("2. Test square 2")
+    print("3. Test square 3")
+    print("4. Test circle 1")
+    print("5. Bank account 1")
+    print("6. Hotel room 1")
+    print("7. Gradebook 1")
+    print("8. Smartphone 1")
+    print("0. Exit")
+
+    while True:
+        choice = input("\nEnter the number of your choice: ")
+
+        if choice == '1':
+            test_square()
+        elif choice == '2':
+            test_square_2()
+        elif choice == '3':
+            test_square_3()
+        elif choice == '4':
+            test_circle_1()
+        elif choice == '5':
+            bank_account_1()
+        elif choice == '6':
+            hotel_room_1()
+        elif choice == '7':
+            gradebook_1()
+        elif choice == '8':
+            smartphone_1()
+        elif choice == '0':
+            print("Exiting the program.")
+            break
+        else:
+            print("Invalid choice, please try again.")
+menu()

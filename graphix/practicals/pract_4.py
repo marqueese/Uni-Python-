@@ -1,4 +1,5 @@
 from graphix import *
+from math import *
 import os
 os.chdir("Text_Files")
 os.getcwd()
@@ -113,7 +114,59 @@ def name_to_number():
 
     print(f"The numerical value of your name is: {total_value}")
 
+def rainfall_chart ():
+    with open("rainfall.txt", "r") as input_file:
+        lines = input_file.readlines()
 
+        locations_array = []
+        rainfall_array = []
+
+        for line in lines:
+            parts = line.rsplit(" ", 1)  # Split by the last space
+            location = parts[0]
+            rainfall = int(parts[1])
+
+            locations_array.append(location)
+            rainfall_array.append(rainfall)
+
+    for location, rainfall in zip(locations_array, rainfall_array):
+        print(f"{location} {rainfall} {'*' * rainfall}")
+
+def rainfall_graphics():
+    window = Window("Rainfall Graph", 500, 500)
+
+    # Open the rainfall data file
+    with open("rainfall.txt", "r") as input_file:
+        lines = input_file.readlines()
+
+        locations_array = []
+        rainfall_array = []
+
+        for line in lines:
+            parts = line.rsplit(" ", 1)  # Split by the last space
+            location = parts[0]
+            rainfall = int(parts[1])
+
+            locations_array.append(location)
+            rainfall_array.append(rainfall)
+
+        # Draw each location and its rainfall based on user clicks
+        for location, rainfall in zip(locations_array, rainfall_array):
+            click_point = window.get_mouse()  # Wait for user to click the position
+
+            # Draw the location name
+            location_text = Text(click_point, location)
+            location_text.draw(window)
+
+            # Draw the rainfall as asterisks just below the location text
+            rainfall_text_point = Point(click_point.x, click_point.y + 20)
+            rainfall_message = "*" * rainfall
+            rain = Text(rainfall_text_point, rainfall_message)
+            rain.draw(window)
+
+    # Wait for final click to close the window
+    window.get_mouse()
+    window.close()
 
 
 def menu():
@@ -131,6 +184,9 @@ def menu():
         print("10: File in Caps")
         print("11: Total Spending")
         print("12: Name to number")
+        print("13: Rainfall chart")
+        print("14: Rainfall graphics")
+        print("15: stick figures")
         print("0. Exit")
 
         choice = input("\nEnter the number of your choice: ")
@@ -160,7 +216,9 @@ def menu():
         elif choice == "12":
             name_to_number()
         elif choice == "13":
-            name_to_number()
+            rainfall_chart()
+        elif choice == "14":
+            rainfall_graphics()
         elif choice == '0':
             print("Exiting the program.")
             break

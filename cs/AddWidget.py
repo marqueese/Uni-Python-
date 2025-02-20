@@ -1,8 +1,8 @@
 from tkinter import Toplevel, Frame, Label, Button
 
-from coursework.SmartLight import SmartLight
-from coursework.smartFridge import SmartFridge
-from coursework.smartPlug import SmartPlug
+from SmartLight import SmartLight
+from smartFridge import SmartFridge
+from smartPlug import SmartPlug
 
 
 class AddWidget:

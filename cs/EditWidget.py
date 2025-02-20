@@ -1,6 +1,5 @@
-from gc import callbacks
 from tkinter import Tk, Frame, Label, Button, Toplevel, Entry, IntVar
-from coursework.smartFridge import SmartFridge
+from smartFridge import SmartFridge
 
 class Editor:
     def __init__(self, parent,index, devices, callback):

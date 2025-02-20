@@ -2,7 +2,8 @@ from smartPlug import SmartPlug
 
 class SmartLight(SmartPlug):
 
-    def __init__(self, brightness=50):
+    def __init__(self, consumption_rate, brightness=50):
+        super().__init__(consumption_rate)
         self.switched_on = False
         if 0 <= brightness <= 100:
             self._percentage = brightness

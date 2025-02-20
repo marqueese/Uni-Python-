@@ -2,15 +2,13 @@ from SmartLight import SmartLight
 from smartFridge import SmartFridge
 from smartPlug import SmartPlug
 
-class SmartHome(SmartLight, SmartFridge, SmartPlug):
+class SmartHome:
 
     def __init__(self):
         self.devices = []
-        super().__init__()
 
-
-    def add_devices(self, device_type):
-        self.devices.append(device_type)
+    def add_devices(self, device):
+        self.devices.append(device)
 
     def get_device(self, index):
         return self.devices[index]
@@ -24,7 +22,6 @@ class SmartHome(SmartLight, SmartFridge, SmartPlug):
             if not device.switched_on:
                 device.toggle_switch()
 
-
     def switch_all_off(self):
         for device in self.devices:
             if device.switched_on:
@@ -34,7 +31,8 @@ class SmartHome(SmartLight, SmartFridge, SmartPlug):
         devices = [str(device) for device in self.devices]
         return "\n".join(devices)
 
-"""
+
+""""
 def test_smart_home():
     home = SmartHome()
 
@@ -47,8 +45,8 @@ def test_smart_home():
     home.add_devices(light)
     home.add_devices(plug)
 
-    home.switch_all_on()
-    print(home)
+    #home.switch_all_on()
+    #print(home)
 
     home.toggle_device(2)
     print(home)

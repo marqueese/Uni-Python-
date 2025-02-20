@@ -1,22 +1,24 @@
+from gc import callbacks
 from tkinter import Tk, Frame, Label, Button, Toplevel, Entry, IntVar
-
 from coursework.smartFridge import SmartFridge
 
-
 class Editor:
-    def __init__(self, parent, index, devices):
+    def __init__(self, parent,index, devices, callback):
         super().__init__()
         self.top_window = Toplevel()
-        self.top_window.geometry("300x300")
+        self.top_window.geometry("300x150")
         self.top_frame = Frame(self.top_window)
         self.top_frame.pack(padx=10, pady=10)
 
         self.input = IntVar() # store whatever the person puts in
+        self.index = index
+        self.devices = devices
 
-        self.edit_widget(index, devices)
+        self.callback = callback
+        self.edit_widget(index)
 
-    def edit_widget(self, index, devices):
-        device = devices[index]
+    def edit_widget(self, index):
+        device = self.devices[index]
 
         device_type = type(device).__name__.lower()
 
@@ -43,26 +45,31 @@ class Editor:
         button = Button(
             self.top_frame,
             text = "Update",
-            command=lambda: self.set_temp(device)
+            command=lambda: self.update(device_type)
         )
-        button.grid(row=2, column=1)
+        button.grid(row=2, column=0,padx=(80, 0))
 
+        button_1 = Button(
+            self.top_frame,
+            text="Close",
+            command=self.close_window
+        )
+        button_1.grid(row=3, column=0, padx=(80, 0))
 
-        print(device)
+    def update(self, device_type):
+        new_value = self.input.get()
+        device = self.devices[self.index]
 
+        if device_type == "Fridge":
+            device.temp = new_value
+        elif device_type == "Light":
+            device.brightness = new_value
+        elif device_type == "Plug":
+            device.consumption_rate = new_value
 
-    def set_temp(self, device):
-        new_temp = self.input.get()
-        if isinstance(device, SmartFridge):
-            device.temp= new_temp
-        else:
-            print("wrong device")
+        self.callback()
+        self.close_window()
 
-
-
-
-
-
-
-
+    def close_window(self):
+        self.top_window.destroy()
 

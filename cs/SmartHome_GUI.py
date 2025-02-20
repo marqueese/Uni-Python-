@@ -64,15 +64,15 @@ class SmartHomeGUI:
 
         for index, item in enumerate(self.smart_home.devices, start=1):
             device_type = type(item).__name__.lower()
-            measurement = "" # <---- this is also a cunt
+            measurement = " "
 
-            if isinstance(item, SmartFridge)and device_type == "Fridge":
+            if isinstance(item, SmartFridge)and device_type == "smartfridge":
                 device_type = "Fridge"
                 measurement = "Temperature: " + str(item.temp)
-            elif isinstance(item, SmartLight) and device_type == "Light":
+            elif isinstance(item, SmartLight) and device_type == "smartlight":
                 device_type = "Light"
                 measurement = "Brightness: " + str(item.brightness)
-            elif isinstance(item, SmartPlug) and device_type == "Plug":
+            elif isinstance(item, SmartPlug) and device_type == "smartplug":
                 device_type = "Plug"
                 measurement = "Consumption: " + str(item.consumption_rate)
 
@@ -80,7 +80,7 @@ class SmartHomeGUI:
 
             label = Label(
                 self.main_frame,
-                text=str(device_type.capitalize()) + ": " + str(state) + ", " + str(measurement),
+                text=f"{device_type.capitalize()}: {state},  {measurement}",
                 width=30,
                 highlightbackground="black",
                 highlightthickness=3

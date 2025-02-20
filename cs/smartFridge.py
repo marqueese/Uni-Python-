@@ -29,13 +29,13 @@ class SmartFridge(SmartPlug):
             state = "on" if self.switched_on else "off"
             return f"SmartFridge is {state} with a temperature of of {self.temp}"
 
-"""
+#"""
 def test_smart_fridge():
-    fridge = SmartFridge(0) # doesn't make fridge becuase the number isn't correct
+    fridge = SmartFridge(3)
     print(fridge)
 
     fridge.temp = -3 #invalid reverts to previous
     print(fridge)
 
 test_smart_fridge()
-"""
+#"""

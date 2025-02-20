@@ -1,4 +1,3 @@
-from gc import callbacks
 from tkinter import Toplevel, Frame, Label, Button
 
 from coursework.SmartLight import SmartLight

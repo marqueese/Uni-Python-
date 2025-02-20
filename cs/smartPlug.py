@@ -33,23 +33,24 @@ class SmartPlug:
             state = "on" if self.switched_on else "off"
             return f"SmartPlug is {state} with a consumption rate of {self.consumption_rate}"
 
+'''
+def test_smart_plug():
+    plug_1 = SmartPlug(45)
+    print(plug_1)
 
-#def test_smart_plug():
-#    plug_1 = SmartPlug(45)
-#    print(plug_1)
-#
-#    plug_1.toggle_switch()
-#    print(plug_1)
+    plug_1.toggle_switch()
+    print(plug_1)
 
-#    plug_1.consumption_rate = 98
-#    print(plug_1)
+    plug_1.consumption_rate = 98
+    print(plug_1)
 
-#    plug_1.consumption_rate = -70
-#    print(plug_1)
+    plug_1.consumption_rate = -70
+    print(plug_1)
 
-#    plug_1.toggle_switch()
-#    print(plug_1)
+    plug_1.toggle_switch()
+    print(plug_1)
 
-#    plug_2 = SmartPlug(-90)
-#    print(plug_2)
-#test_smart_plug()
+    plug_2 = SmartPlug(-90)
+    print(plug_2)
+test_smart_plug()
+'''

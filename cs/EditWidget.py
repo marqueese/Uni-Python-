@@ -2,7 +2,7 @@ from tkinter import Tk, Frame, Label, Button, Toplevel, Entry, IntVar
 from smartFridge import SmartFridge
 
 class Editor:
-    def __init__(self, parent,index, devices, callback):
+    def __init__(self, index, devices, callback):
         super().__init__()
         self.top_window = Toplevel()
         self.top_window.geometry("300x150")

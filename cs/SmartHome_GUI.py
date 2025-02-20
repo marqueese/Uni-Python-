@@ -12,7 +12,9 @@ class SmartHomeGUI:
         super().__init__()
         self.window = Tk()
         self.window.title("Smart Home GUI")
-        self.window.geometry("700x500")
+        self.window.geometry("600x750")
+
+        #coloring and frame
         self.window.configure(bg="lightblue", borderwidth=3, highlightbackground="black") # use configure to alter the background elements
         self.main_frame = Frame(self.window)
         self.main_frame.pack(padx=10, pady=10)
@@ -26,7 +28,6 @@ class SmartHomeGUI:
         self.window.mainloop()
 
     def create_widget(self):
-
         for widget in self.main_frame.winfo_children():# this works dont question in
             widget.destroy() # watch the indentation or shit breaks
 
@@ -132,7 +133,7 @@ class SmartHomeGUI:
         self.create_widget()
 
     def handle_edit(self, index):
-        Editor(self.window, index, self.smart_home.devices, self.create_widget)
+        Editor(index, self.smart_home.devices, self.create_widget)
 
     def handle_delete(self, index):
         if 0 <= index < len(self.smart_home.devices):

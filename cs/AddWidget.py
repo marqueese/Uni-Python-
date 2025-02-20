@@ -62,21 +62,18 @@ class AddWidget:
     def add_plug(self):
         plug_1 = SmartPlug(75)
         self.smart_home.add_devices(plug_1)
-        #self.devices.append(plug_1) <-- this breaks stuff
         self.callback()
         self.add_widget_window.destroy()
 
     def add_light(self):
         light_1 = SmartLight(28)
         self.smart_home.add_devices(light_1)
-        #self.devices.append(light_1)
         self.callback()
         self.add_widget_window.destroy()
 
     def add_fridge(self):
         fridge_1 = SmartFridge(3)
         self.smart_home.add_devices(fridge_1)
-        #self.devices.append(fridge_1)
         self.callback()
         self.add_widget_window.destroy()
 

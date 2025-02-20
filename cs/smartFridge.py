@@ -22,14 +22,14 @@ class SmartFridge(SmartPlug):
             print("Invalid Temperature selected, must be between either 1, 3, or 5")
 
 
-    def __str__(self):#
+    def __str__(self):
         if self._temperature is None:
             return "SmartFridge was not created due to invalid Temperature selection"
         else:
             state = "on" if self.switched_on else "off"
             return f"SmartFridge is {state} with a temperature of of {self.temp}"
 
-#"""
+"""
 def test_smart_fridge():
     fridge = SmartFridge(3)
     print(fridge)
@@ -38,4 +38,4 @@ def test_smart_fridge():
     print(fridge)
 
 test_smart_fridge()
-#"""
+"""

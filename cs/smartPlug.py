@@ -8,15 +8,12 @@ class SmartPlug:
             self._consumption_rate = None
             print("Item was not created")
 
-
     def toggle_switch(self):
         self.switched_on = not self.switched_on
-
 
     @property
     def consumption_rate(self):
         return self._consumption_rate
-
 
     @consumption_rate.setter
     def consumption_rate(self, value):
@@ -24,7 +21,6 @@ class SmartPlug:
             self._consumption_rate = value
         else:
             print("Invalid consumption rate, must be between 0-150")
-
 
     def __str__(self):#
         if self._consumption_rate is None:

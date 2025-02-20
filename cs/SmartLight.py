@@ -30,7 +30,7 @@ class SmartLight(SmartPlug):
             state = "on" if self.switched_on else "off"
             return f"SmartLight is {state} with a brightness of {self.brightness}"
 
-#"""
+"""
 def test_smart_light():
     light = SmartLight(80)
     print(light)
@@ -41,4 +41,4 @@ def test_smart_light():
     print(light)
 
 test_smart_light()
-#"""
+"""

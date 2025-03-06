@@ -2,7 +2,7 @@ from tkinter import Tk, Frame, Label, Button, Toplevel, Entry, IntVar
 from smartFridge import SmartFridge
 
 class Editor:
-    def __init__(self, index, devices, callback):
+    def __init__(self, index,error_message , devices, callback):
         super().__init__()
         self.top_window = Toplevel()
         self.top_window.geometry("300x150")
@@ -15,6 +15,7 @@ class Editor:
 
         self.callback = callback
         self.edit_widget(index)
+        self.error_message = error_message
 
     def edit_widget(self, index):
         device = self.devices[index]
@@ -55,7 +56,18 @@ class Editor:
         )
         button_1.grid(row=3, column=0, padx=(80, 0))
 
+    def error_message(self):
+        if self.error_message != "":
+            exit()
+        else:
+            pass
+
+
+
+
     def update(self, device_type):
+        print(self.error_message)
+
         new_value = self.input.get()
         device = self.devices[self.index]
 

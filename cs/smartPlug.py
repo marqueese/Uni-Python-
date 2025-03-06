@@ -2,6 +2,7 @@ class SmartPlug:
 
     def __init__(self, consumption_rate):
         self.switched_on = False
+        self.error_message = ""
         if 0 <= consumption_rate <= 150:
             self._consumption_rate = consumption_rate
         else:
@@ -20,9 +21,9 @@ class SmartPlug:
         if 0 <= value <= 150:
             self._consumption_rate = value
         else:
-            print("Invalid consumption rate, must be between 0-150")
+            self.error_message = "Invalid consumption rate, must be between 0-150"
 
-    def __str__(self):#
+    def __str__(self):
         if self._consumption_rate is None:
             return "Smart plug was not created due to invalid consumption rate"
         else:

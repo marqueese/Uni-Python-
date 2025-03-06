@@ -5,6 +5,7 @@ class SmartLight(SmartPlug):
     def __init__(self, consumption_rate, brightness=50):
         super().__init__(consumption_rate)
         self.switched_on = False
+        self.error_message = ""
         if 0 <= brightness <= 100:
             self._percentage = brightness
         else:
@@ -20,7 +21,7 @@ class SmartLight(SmartPlug):
         if 0 <= brightness <= 100:
             self._percentage = brightness
         else:
-            print("Invalid Brightness selected, must be between 0-100")
+            self.error_message ="Invalid Brightness selected, must be between 0-100"
 
 
     def __str__(self):#

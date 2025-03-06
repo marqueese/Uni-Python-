@@ -4,6 +4,7 @@ class SmartFridge(SmartPlug):
 
     def __init__(self, temp=3):
         self.switched_on = False
+        self.error_message = ""
         if temp == 1 or temp == 3 or temp == 5:
             self._temperature = temp
         else:
@@ -19,7 +20,7 @@ class SmartFridge(SmartPlug):
         if temp == 1 or temp == 3 or temp == 5:
             self._temperature = temp
         else:
-            print("Invalid Temperature selected, must be between either 1, 3, or 5")
+            self.error_message = "Invalid Temperature selected, must be between either 1, 3, or 5"
 
 
     def __str__(self):

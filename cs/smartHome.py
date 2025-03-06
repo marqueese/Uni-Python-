@@ -1,3 +1,5 @@
+from operator import index
+
 from SmartLight import SmartLight
 from smartFridge import SmartFridge
 from smartPlug import SmartPlug
@@ -28,11 +30,10 @@ class SmartHome:
                 device.toggle_switch()
 
     def __str__(self):
-        devices = [str(device) for device in self.devices]
+        devices = [f"{index + 1}. {str(device)}" for index, device in enumerate(self.devices)]
         return "\n".join(devices)
 
 
-""""
 def test_smart_home():
     home = SmartHome()
 
@@ -52,5 +53,5 @@ def test_smart_home():
     print(home)
 
 test_smart_home()
-"""
+
 

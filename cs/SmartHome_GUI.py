@@ -29,7 +29,7 @@ class SmartHomeGUI:
 
     def create_widget(self):
         for widget in self.main_frame.winfo_children():# this works dont question in
-            widget.destroy() # watch the indentation or shit breaks
+            widget.destroy() # watch the indentation
 
         add_button = Button(
             self.main_frame,
@@ -70,14 +70,18 @@ class SmartHomeGUI:
             if isinstance(item, SmartFridge)and device_type == "smartfridge":
                 device_type = "Fridge"
                 measurement = "Temperature: " + str(item.temp)
+                error_message = item.error_message
             elif isinstance(item, SmartLight) and device_type == "smartlight":
                 device_type = "Light"
                 measurement = "Brightness: " + str(item.brightness)
+                error_message = item.error_message
             elif isinstance(item, SmartPlug) and device_type == "smartplug":
                 device_type = "Plug"
                 measurement = "Consumption: " + str(item.consumption_rate)
+                error_message = item.error_message
 
             state = item.switched_on
+
 
             label = Label(
                 self.main_frame,
@@ -101,7 +105,7 @@ class SmartHomeGUI:
             edit_button = Button(
                 self.main_frame,
                 text="Edit",
-                command=lambda i=index - 1: self.handle_edit(i),
+                command=lambda i=index - 1, e=item.error_message: self.handle_edit(i, e),
                 width=9,
                 relief="raised",
                 borderwidth=3
@@ -132,8 +136,8 @@ class SmartHomeGUI:
         self.smart_home.toggle_device(index)
         self.create_widget()
 
-    def handle_edit(self, index):
-        Editor(index, self.smart_home.devices, self.create_widget)
+    def handle_edit(self, index, error_message):
+        Editor(index, error_message, self.smart_home.devices, self.create_widget)
 
     def handle_delete(self, index):
         if 0 <= index < len(self.smart_home.devices):
@@ -144,7 +148,7 @@ class SmartHomeGUI:
         AddWidget(self.window, self.smart_home.devices, self.smart_home, self.create_widget)
 
     def __str__(self):
-        devices = [str(device) for device in self.smart_home.devices]
+        devices = [f"{index + 1}. {str(device)}" for index, device in enumerate(self.devices)]
         return "\n".join(devices)
 
 def main():

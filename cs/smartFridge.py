@@ -9,7 +9,7 @@ class SmartFridge(SmartPlug):
             self._temperature = temp
         else:
             self._temperature = None
-            print("Item was not created due to invalid temperature selection")
+            self.error_message = "Item was not created due to invalid temperature selection"
 
     @property
     def temp(self):

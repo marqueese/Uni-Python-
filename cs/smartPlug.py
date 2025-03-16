@@ -7,7 +7,7 @@ class SmartPlug:
             self._consumption_rate = consumption_rate
         else:
             self._consumption_rate = None
-            print("Item was not created")
+            self.error_message = "Item was not created"
 
     def toggle_switch(self):
         self.switched_on = not self.switched_on
